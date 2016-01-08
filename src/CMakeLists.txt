@@ -2,7 +2,8 @@
 
 rock_library(osgdb_bobj
     SOURCES ReaderWriterBOBJ.cpp
-    HEADERS ReaderWriterBOBJ.hpp)
+    HEADERS ReaderWriterBOBJ.hpp
+    DEPS_PKGCONFIG openscenegraph-osgDB)
 
 set_target_properties(osgdb_bobj PROPERTIES PREFIX "")
 
