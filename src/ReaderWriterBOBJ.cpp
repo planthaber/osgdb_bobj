@@ -14,16 +14,12 @@ ReaderWriterBOBJ::ReaderWriterBOBJ(){
 osgDB::ReaderWriter::ReadResult ReaderWriterBOBJ::readNode(
 		const std::string& file,
 		const osgDB::ReaderWriter::Options* options) const {
-
-	printf("readNode\n");
     return readBobjFromFile(file);;
 
 }
 
 osgDB::ReaderWriter::ReadResult ReaderWriterBOBJ::readNode(
 		std::istream& stream, const Options* options) const {
-
-	printf("readNode\n");
 	readFileStruct newNodeFile;
 	newNodeFile.setStatus(osgDB::ReaderWriter::ReadResult::NOT_IMPLEMENTED);
 	return newNodeFile;
