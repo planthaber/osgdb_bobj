@@ -17,7 +17,6 @@ osgDB::ReaderWriter::ReadResult ReaderWriterBOBJ::readNode(
 {
     std::ifstream stream (file.c_str(), std::ifstream::binary);
     if(!stream.is_open()){
-        printf("unable to open stream\n");
         readFileStruct newNodeFile;
         newNodeFile.setStatus(osgDB::ReaderWriter::ReadResult::FILE_NOT_FOUND);
         return newNodeFile;
@@ -58,8 +57,6 @@ osgDB::ReaderWriter::ReadResult ReaderWriterBOBJ::readBobjFromStream(std::istrea
     readFileStruct newNodeFile;
     newNodeFile.fileName = name;
 
-    printf("reading bobj %s\n",name.c_str());
-
     char buffer[312];
 
     int da, i, r, o, foo=0;
@@ -79,10 +76,13 @@ osgDB::ReaderWriter::ReadResult ReaderWriterBOBJ::readBobjFromStream(std::istrea
     osg::ref_ptr<osg::Vec2Array> osgTexcoords = new osg::Vec2Array();
     osg::ref_ptr<osg::Vec3Array> osgNormals = new osg::Vec3Array();
 
-    while( (r = stream.readsome(buffer+foo, 256)) > 0) {
+    while( true ) {
 
-        printf("read stream r=%i\n",r);
-
+        stream.read(buffer+foo, 256);
+        r = stream.gcount();
+        if (!r > 0){
+            break;
+        }
 
         o = 0;
         while(o < r+foo-50 || (r<256 && o < r+foo)) {
@@ -184,8 +184,6 @@ osgDB::ReaderWriter::ReadResult ReaderWriterBOBJ::readBobjFromStream(std::istrea
 
     newNodeFile.setObject(geode);
     //nodeFiles.push_back(newNodeFile);
-
-    printf("reading done\n");
 
     return newNodeFile;
 }
