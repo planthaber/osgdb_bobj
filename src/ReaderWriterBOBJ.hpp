@@ -35,7 +35,7 @@ class  ReaderWriterBOBJ: public osgDB::ReaderWriter
 
     }; // end of struct readFileStruct
 
-	std::vector<readFileStruct> nodeFiles;
+	//std::vector<readFileStruct> nodeFiles;
 
 
 public:
@@ -51,6 +51,6 @@ public:
 	virtual osgDB::ReaderWriter::WriteResult writeObject (const osg::Object &object, std::ostream & stream, const Options *options=NULL) const ;
 
 private:
-	osgDB::ReaderWriter::ReadResult readBobjFromFile(const std::string & file) const;
+	osgDB::ReaderWriter::ReadResult readBobjFromStream(std::istream &stream, const std::string& name) const;
 
 };
